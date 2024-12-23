@@ -1,6 +1,8 @@
+import gym.Employees.Instructor;
 import gym.Exception.*;
+import gym.management.Gym;
+import gym.Employees.Secretary;
 import gym.customers.*;
-import gym.management.*;
 import gym.management.Sessions.*;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class Main {
         } catch (InvalidAgeException e) {
             System.out.println(e.getMessage());
         }
+
         try {
             Client c9 = gymSecretary.registerClient(p4);
         } catch (DuplicateClientException e) {
@@ -66,6 +69,7 @@ public class Main {
         Session s5 = gymSecretary.addSession(SessionType.Ninja, "14-01-2025 20:00", ForumType.All, i3);
         Session s6 = gymSecretary.addSession(SessionType.ThaiBoxing, "14-01-2025 20:00", ForumType.Male, i1);
 
+
         try {
             Session s7 = gymSecretary.addSession(SessionType.ThaiBoxing, "10-10-2025 21:00", ForumType.All, i3);
         } catch (InstructorNotQualifiedException e) {
@@ -88,6 +92,7 @@ public class Main {
         gymSecretary.registerClientToLesson(c7, s5);
 
 
+        /**Error: The client is already registered for this lesson**/ //removeeeeeeeeeeeeeeeeeee
         try{
             gymSecretary.registerClientToLesson(c1,s1);
         } catch (DuplicateClientException e) {
@@ -95,6 +100,8 @@ public class Main {
         }
 
         gymSecretary.unregisterClient(c2);
+
+        /**Error: The client is not registered with the gym and cannot enroll in lessons**/ //removeeeeeeeeeeeeeeeeeee
         try {
             gymSecretary.registerClientToLesson(c2, s3);
         } catch (ClientNotRegisteredException e) {
