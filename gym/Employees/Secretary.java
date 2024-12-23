@@ -11,21 +11,24 @@ import static gym.management.Sessions.SessionFactory.createSession;
 
 public class Secretary extends Employees {
     public Secretary(Person person,int salary) {
-        super(person.getName(),person.getBalance(),person.getGender(),person.getBirthday(),"Secretary",salary);
+        super(person,"Secretary",salary);
     }
     public Client registerClient(Person person) throws InvalidAgeException, DuplicateClientException {
-        if (person.getAge()<18){
-            throw new InvalidAgeException("Error: Client must be at least 18 years old to register.");
+        if (isTheCurrentSecretary(this)) {
+            if (person.getAge() < 18) {
+                throw new InvalidAgeException("Error: Client must be at least 18 years old to register.");
+            } else if (Gym.getInstance().getClientsList().containsKey(person.getID())) {
+                throw new DuplicateClientException("Error: Client is already registered.");
+            } else {
+                Client client = new Client(person);
+                Gym.getInstance().addClient(client);
+                Gym.getInstance().addLog("Registered new client: " + client.getName());
+                return client;
+            }
         }
-        else if (Gym.getInstance().getClientsList().containsKey(person.getID())) {
-            throw new DuplicateClientException("Error: Client is already registered.");
-        }
-        else{
-            Client client = new Client(person);
-            Gym.getInstance().addClient(client);
-            Gym.getInstance().addLog("Registered new client: " + client.getName());
-            return client;}
+        return null;
     }
+
     public void unregisterClient(Client client) {
         if (Gym.getInstance().getClientsList().containsKey(client.getID())) {
             Gym.getInstance().getClientsList().remove(client.getID());
@@ -40,6 +43,9 @@ public class Secretary extends Employees {
         Gym.getInstance().addInstructor(instructor);
         Gym.getInstance().addLog("Hired new instructor: " + instructor.getName()+" with salary per hour: "+salary);
         return instructor;
+    }
+    public boolean isTheCurrentSecretary(Secretary secretary){
+        return Gym.getInstance().getSecretary()==secretary;
     }
 
     public Session addSession(SessionType type,String date,ForumType forum,Instructor instructor)throws InstructorNotQualifiedException {

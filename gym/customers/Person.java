@@ -8,7 +8,7 @@ public class Person {
     protected Gender gender;
     protected String birthday;
     protected int balance;
-    protected final int ID;
+    protected int ID;
     private static int numberID=1111;
     protected ForumType forumType;
     public Person(String name, int balance, Gender gender, String birthday) {
@@ -16,10 +16,20 @@ public class Person {
         this.balance = balance;
         this.gender = gender;
         this.birthday = birthday;
-        this.ID=++numberID;
+        this.ID=numberID++;
         this.age= MyDateFunc.Age(birthday);
         setForumType();
     }
+    public Person(Person p) {
+        this.name = p.name;
+        this.balance = p.balance;
+        this.gender = p.gender;
+        this.birthday = p.birthday;
+        this.ID= p.getID();
+        this.age=p.getAge();
+        this.forumType=getForumType();
+    }
+
     public String getName() {return this.name;}
     public int getAge() {return (int)this.age;}
     public int getBalance() {return this.balance;}

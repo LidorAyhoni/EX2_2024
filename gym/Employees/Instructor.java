@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Instructor extends Employees {
     protected final ArrayList<SessionType>  certifiedClasses =new ArrayList<>();
     public Instructor(Person person,int salary,ArrayList<SessionType> certifiedClasses){
-        super(person.getName(), person.getBalance(), person.getGender(),person.getBirthday(),"Instructor",salary);
+        super(person,"Instructor",salary);
         this.certifiedClasses.addAll(certifiedClasses);
     }
     public boolean isCertified(SessionType type){
