@@ -1,4 +1,4 @@
-package gym.Employees;
+package gym.management;
 
 
 import gym.customers.Person;

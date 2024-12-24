@@ -1,8 +1,7 @@
 package gym.management;
 
-import gym.Employees.Secretary;
+import gym.Bank;
 import gym.customers.Client;
-import gym.Employees.Instructor;
 import gym.customers.Person;
 import gym.management.Sessions.Session;
 
@@ -14,7 +13,7 @@ public class Gym {
     private static Gym Instance;
     protected String name;
     protected Secretary secretary;
-    protected int balance;
+    protected Bank bankAccount=new Bank(0);
     protected final HashMap<Integer,Client> clients = new HashMap<>();
     protected final ArrayList<Instructor> instructors = new ArrayList<>();
     protected final ArrayList<Session> Sessions = new ArrayList<>();
@@ -26,6 +25,7 @@ public class Gym {
         }
         return Instance;
     }
+    public ArrayList<Session> getSessions(){return Sessions;}
     public String getName() {return this.name;}
     public void setName(String name) {this.name = name;}
     public Secretary getSecretary(){return this.secretary;}
@@ -50,20 +50,14 @@ public class Gym {
     public ArrayList<String> getGymLogs(){
         return gymLogs;
     }
-    /**
-     *  need to understand how she cannot change
-     *  need to do Down-Casting?
-     *  */
 
     public void setSecretary(Person person,int salary){
         this.secretary = new Secretary(person,salary);
         addLog("A new secretary has started working at the gym: "+person.getName());
     }
+    public Bank getBankAccount(){return this.bankAccount;}
     public int getBalance(){
-        return this.balance;
-    }
-    public void setBalance(int balance){
-        this.balance = balance;
+        return bankAccount.getBalance();
     }
     @Override
     public String toString(){

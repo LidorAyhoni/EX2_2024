@@ -1,7 +1,7 @@
 package gym.management.Sessions;
 
 import gym.customers.ForumType;
-import gym.Employees.Instructor;
+import gym.management.Instructor;
 public class SessionFactory {
     public static Session createSession(SessionType sessionType, String sessionDate, ForumType forumType, Instructor instructor) {
         switch (sessionType) {

@@ -1,7 +1,7 @@
-import gym.Employees.Instructor;
+import gym.management.Instructor;
 import gym.Exception.*;
 import gym.management.Gym;
-import gym.Employees.Secretary;
+import gym.management.Secretary;
 import gym.customers.*;
 import gym.management.Sessions.*;
 
@@ -91,8 +91,6 @@ public class Main {
         gymSecretary.registerClientToLesson(c6, s5);
         gymSecretary.registerClientToLesson(c7, s5);
 
-
-        /**Error: The client is already registered for this lesson**/ //removeeeeeeeeeeeeeeeeeee
         try{
             gymSecretary.registerClientToLesson(c1,s1);
         } catch (DuplicateClientException e) {
@@ -101,7 +99,6 @@ public class Main {
 
         gymSecretary.unregisterClient(c2);
 
-        /**Error: The client is not registered with the gym and cannot enroll in lessons**/ //removeeeeeeeeeeeeeeeeeee
         try {
             gymSecretary.registerClientToLesson(c2, s3);
         } catch (ClientNotRegisteredException e) {
