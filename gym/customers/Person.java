@@ -28,7 +28,7 @@ public class Person {
         this.birthday = p.birthday;
         this.ID= p.getID();
         this.age=p.getAge();
-        this.forumType=getForumType();
+        this.forumType=p.forumType;
     }
     public String getName() {return this.name;}
     public int getAge() {return (int)this.age;}
@@ -41,11 +41,8 @@ public class Person {
         numberID--;
     }
     public void setForumType() {
-        if (getAge()<65){
-            if (getGender()==Gender.Male)this.forumType=ForumType.Male;
-            else this.forumType=ForumType.Female;
-        }
-        else this.forumType=ForumType.Seniors;
+        if (getAge()<65){this.forumType=ForumType.valueOf(gender.toString());}
+        else this.forumType=ForumType.Seniors; ;
     }
     @Override
     public boolean equals(Object obj) {

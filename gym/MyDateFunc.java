@@ -45,6 +45,12 @@ public class MyDateFunc{
         newFormat+=sessionDate.substring(11);
         return newFormat;
     }
+    public static String parseDateFormat1 (String sessionDate){
+        String newFormat= sessionDate.substring(0,2);
+        newFormat+="-"+sessionDate.substring(3,5);
+        newFormat+="-"+sessionDate.substring(6,10);
+        return newFormat;
+    }
     public static String opDate(String sessionDate) {
         String newFormat =sessionDate.substring(6,10);
         newFormat+="-"+sessionDate.substring(3,5);

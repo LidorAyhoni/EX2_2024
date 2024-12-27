@@ -64,7 +64,8 @@ public class Gym {
         String str="Gym Name: "+this.name;
         str+="\nGym Secretary: "+this.secretary;
         str+="\nGym Balance: "+getBalance();
-        str+="\n \n";
+        str+="\n";
+        str+="\n";
         str+="Clients Data:";
         str+="\n";
         for (Map.Entry<Integer,Client> entry : clients.entrySet()){
