@@ -61,7 +61,7 @@ public class Secretary extends Employees {
             if (instructor.isCertified(type)) {
                 Session session = createSession(type, date, forum, instructor);
                 Gym.getInstance().addSession(session);
-                Gym.getInstance().addLog("Created new session: " + type + " on " + MyDateFunc.parseDateFormat(date) + " with instructor: " + instructor.getName());
+                Gym.getInstance().addLog("Created new session: " + type + " on " + MyDateFunc.dd_MM_yyyy_T_HH_mm(date) + " with instructor: " + instructor.getName());
                 instructor.setNumHoursOfTraining(1);
                 return session;
             }
@@ -89,8 +89,7 @@ public class Secretary extends Employees {
             if (session.getForumType() == ForumType.Seniors && client.getForumType() != ForumType.Seniors) {
                 Logs.add("Failed registration: Client doesn't meet the age requirements for this session (Seniors)");
                 flag = false;
-            }
-            else if (session.getForumType() != client.getForumType() && session.getForumType() != ForumType.All) {
+            } else if (session.getForumType() != client.getForumType() && session.getForumType() != ForumType.All) {
                 Logs.add("Failed registration: Client's gender doesn't match the session's gender requirements");
                 flag = false;
             }
@@ -106,7 +105,7 @@ public class Secretary extends Employees {
                 client.getBankAccount().pay(session.getPrice());
                 Gym.getInstance().getBankAccount().addMoneyToMyAcc(session.getPrice());
                 session.addParticipant(client);
-                Gym.getInstance().addLog("Registered client: " + client.getName() + " to session: " + session.getSessionType() + " on " + MyDateFunc.parseDateFormat(session.getDate()) + " for price: " + session.getPrice());
+                Gym.getInstance().addLog("Registered client: " + client.getName() + " to session: " + session.getSessionType() + " on " + MyDateFunc.dd_MM_yyyy_T_HH_mm(session.getDate()) + " for price: " + session.getPrice());
             }
             for (String s : Logs) {
                 Gym.getInstance().addLog(s);
@@ -136,7 +135,7 @@ public class Secretary extends Employees {
                 publisher.addClient(client);
             }
             publisher.send(MSG);
-            Gym.getInstance().addLog("A message was sent to everyone registered for session " + session.getSessionType() + " on " + MyDateFunc.parseDateFormat(session.getDate()) + " : " + MSG);
+            Gym.getInstance().addLog("A message was sent to everyone registered for session " + session.getSessionType() + " on " + MyDateFunc.dd_MM_yyyy_T_HH_mm(session.getDate()) + " : " + MSG);
         }
     }
 
@@ -144,14 +143,14 @@ public class Secretary extends Employees {
         if (isTheCurrentSecretary()) {
             Publisher publisher = new Publisher();
             for (Session session : Gym.getInstance().getSessions()) {
-                if (MyDateFunc.parseDateFormat1(session.getDate()).equals(date)) {
+                if (MyDateFunc.MM_dd_yyyy(session.getDate()).equals(date)) {
                     for (Client client : session.getParticipants()) {
                         publisher.addClient(client);
                     }
                 }
             }
             publisher.send(MSG2);
-            Gym.getInstance().addLog("A message was sent to everyone registered for a session on " + MyDateFunc.opDate(date) + " : " + MSG2);
+            Gym.getInstance().addLog("A message was sent to everyone registered for a session on " + MyDateFunc.dd_MM_yyyy(date) + " : " + MSG2);
         }
     }
 

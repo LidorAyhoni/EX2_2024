@@ -10,55 +10,74 @@ public class Person {
     protected String birthday;
     protected Bank bankAccount;
     protected int ID;
-    private static int numberID=1111;
+    private static int numberID = 1111;
     protected ForumType forumType;
+
     public Person(String name, int balance, Gender gender, String birthday) {
         this.name = name;
-        this.bankAccount =new Bank(balance);
+        this.bankAccount = new Bank(balance);
         this.gender = gender;
         this.birthday = birthday;
-        this.ID=numberID++;
-        this.age= MyDateFunc.Age(birthday);
+        this.ID = numberID++;
+        this.age = MyDateFunc.Age(birthday);
         setForumType();
     }
+
     public Person(Person p) {
         this.name = p.name;
         this.bankAccount = p.bankAccount;
         this.gender = p.gender;
         this.birthday = p.birthday;
-        this.ID= p.getID();
-        this.age=p.getAge();
-        this.forumType=p.forumType;
+        this.ID = p.getID();
+        this.age = p.getAge();
+        this.forumType = p.forumType;
     }
-    public String getName() {return this.name;}
-    public int getAge() {return (int)this.age;}
-    public Bank getBankAccount() {return this.bankAccount;}
-    public Gender getGender() {return this.gender;}
-    public String getBirthday() {return this.birthday;}
-    public ForumType getForumType() {return this.forumType;}
-    public int getID() {return this.ID;}
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getAge() {
+        return (int) this.age;
+    }
+
+    public Bank getBankAccount() {
+        return this.bankAccount;
+    }
+
+    public ForumType getForumType() {
+        return this.forumType;
+    }
+
+    public int getID() {
+        return this.ID;
+    }
+
     public static void decreaseNumberID() {
         numberID--;
     }
+
     public void setForumType() {
-        if (getAge()<65){this.forumType=ForumType.valueOf(gender.toString());}
-        else this.forumType=ForumType.Seniors; ;
+        if (getAge() < 65) {
+            this.forumType = ForumType.valueOf(gender.toString());
+        } else this.forumType = ForumType.Seniors;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Person) {
-            return this.ID==((Person) obj).ID;
+            return this.ID == ((Person) obj).ID;
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "ID: "+this.ID+" | "+
-                "Name: "+this.name+" | "+
-                "Gender: "+this.gender+" | "+
-                "Birthday: "+this.birthday+" | "+
-                "Age: "+getAge()+" | "+
-                "Balance: "+bankAccount.getBalance();
+        return "ID: " + this.ID + " | " +
+                "Name: " + this.name + " | " +
+                "Gender: " + this.gender + " | " +
+                "Birthday: " + this.birthday + " | " +
+                "Age: " + getAge() + " | " +
+                "Balance: " + bankAccount.getBalance(); //Delegation
     }
 }
